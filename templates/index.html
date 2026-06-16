@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Lead Scoring & Automation System - Premium Dashboard</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #080c16;
+      --bg-gradient: radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.2) 0%, transparent 40%),
+                     radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.15) 0%, transparent 40%);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --color-vip: #10b981;       /* Emerald Green */
+      --color-vip-bg: rgba(16, 185, 129, 0.15);
+      --color-potential: #f59e0b; /* Amber Gold */
+      --color-potential-bg: rgba(245, 158, 11, 0.15);
+      --color-trash: #ef4444;     /* Coral Red */
+      --color-trash-bg: rgba(239, 68, 68, 0.15);
+      --color-neutral: #3b82f6;   /* Info Blue */
+      
+      --glass-bg: rgba(15, 23, 42, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.07);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      
+      --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: var(--bg-base);
+      background-image: var(--bg-gradient);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 30px;
+      line-height: 1.5;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+    }
+    
+    /* Layout */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    /* Premium Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow-premium);
+    }
+    
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-glow {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b82f6, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    }
+    
+    .brand-title h1 {
+      font-size: 22px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .brand-title p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+    
+    /* Settings & Controls Panel */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 24px;
+    }
+    
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .control-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-premium);
+      transition: var(--transition-smooth);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    
+    .panel-title {
+      font-size: 16px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .form-group label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    
+    .input-glass {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+    
+    .input-glass:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* Stats grid */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    
+    .stat-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .stat-val {
+      font-size: 22px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    
+    /* Buttons */
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #4f46e5);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .btn-success {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* Main Content (Leads List) */
+    .leads-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.2);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    
+    th, td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    th {
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    /* Score and Status badges */
+    .score-badge {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    
+    .badge-vip {
+      color: var(--color-vip);
+      background: var(--color-vip-bg);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .badge-potential {
+      color: var(--color-potential);
+      background: var(--color-potential-bg);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    
+    .badge-trash {
+      color: var(--color-trash);
+      background: var(--color-trash-bg);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    
+    .badge-none {
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .status-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    
+    .status-reviewed {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--color-vip);
+    }
+    
+    .status-pending {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--color-neutral);
+    }
+    
+    .action-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .action-icon-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+    }
+    
+    .action-icon-btn:hover {
+      background: var(--glass-hover);
+      transform: scale(1.05);
+    }
+    
+    .action-icon-btn.approve {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: var(--color-vip);
+    }
+    
+    .action-icon-btn.approve:hover {
+      background: var(--color-vip);
+      color: white;
+    }
+    
+    /* Modal Box */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(8, 12, 22, 0.75);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      width: 500px;
+      max-width: 90%;
+      background: rgba(21, 32, 54, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: modalFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes modalFadeIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+    }
+    
+    .close-modal-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .close-modal-btn:hover {
+      color: #fff;
+    }
+    
+    .info-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    /* API Mode status */
+    .api-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 12px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--text-muted);
+    }
+    
+    .status-dot.active {
+      background-color: var(--color-vip);
+      box-shadow: 0 0 10px var(--color-vip);
+    }
+    
+    .status-dot.simulated {
+      background-color: var(--color-potential);
+      box-shadow: 0 0 10px var(--color-potential);
+    }
+    
+    /* Loading overlay */
+    .loading-overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(8, 12, 22, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      border-radius: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .loading-overlay.active {
+      display: flex;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="brand-section">
+        <div class="logo-glow">AI</div>
+        <div class="brand-title">
+          <h1>HỆ THỐNG AI LEAD SCORING</h1>
+          <p>Real Estate Customer Automation</p>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <div class="api-status">
+          <span id="api-status-dot" class="status-dot"></span>
+          <span id="api-status-text">Chưa cấu hình API Key</span>
+        </div>
+        
+        <button id="btn-export-excel" class="btn btn-success" style="width: auto; padding: 10px 20px;" onclick="exportExcel()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Xuất File Excel
+        </button>
+      </div>
+    </header>
+    
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Control Panel -->
+      <div class="control-panel">
+        
+        <!-- API Config & Google Sheet -->
+        <div class="glass-card" style="position: relative;">
+          <div id="loader-config" class="loading-overlay">
+            <div class="spinner"></div>
+            <div id="config-load-text">Đang tải dữ liệu...</div>
+          </div>
+          
+          <h3 class="panel-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            Cấu Hình Hệ Thống
+          </h3>
+          
+          <div class="form-group">
+            <label for="input-api-key">Gemini API Key</label>
+            <input type="password" id="input-api-key" class="input-glass" placeholder="Nhập API Key để chạy AI thực tế (Tùy chọn)" onchange="updateApiStatus()">
+            <span style="font-size: 11px; color: var(--text-muted);">Mặc định nếu trống: Hệ thống dùng AI mô phỏng để chấm điểm.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="input-sheet-url">Google Sheets Link</label>
+            <input type="text" id="input-sheet-url" class="input-glass" value="https://docs.google.com/spreadsheets/d/1hRvHE6RXm1peVG07avfApPEHocOcPld9IA94hE3vUGE/edit?gid=0#gid=0" placeholder="https://docs.google.com/.../edit">
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+            <button class="btn btn-secondary" onclick="fetchLeads()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              Đồng Bộ Google Sheets
+            </button>
+            
+            <button class="btn btn-primary" onclick="scoreLeads()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              Chạy AI Lead Scoring
+            </button>
+          </div>
+        </div>
+        
+        <!-- Stats Panel -->
+        <div class="glass-card">
+          <h3 class="panel-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Thống Kê Chất Lượng
+          </h3>
+          
+          <div class="stats-container">
+            <div class="stat-box" style="border-left: 3px solid var(--color-neutral);">
+              <div class="stat-val" id="stat-total">0</div>
+              <div class="stat-label">Tổng Lead</div>
+            </div>
+            <div class="stat-box" style="border-left: 3px solid var(--color-vip);">
+              <div class="stat-val" id="stat-vip" style="color: var(--color-vip);">0</div>
+              <div class="stat-label">VIP</div>
+            </div>
+            <div class="stat-box" style="border-left: 3px solid var(--color-potential);">
+              <div class="stat-val" id="stat-potential" style="color: var(--color-potential);">0</div>
+              <div class="stat-label">Tiềm Năng</div>
+            </div>
+            <div class="stat-box" style="border-left: 3px solid var(--color-trash);">
+              <div class="stat-val" id="stat-trash" style="color: var(--color-trash);">0</div>
+              <div class="stat-label">Rác</div>
+            </div>
+          </div>
+          
+          <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; font-size: 12px; color: var(--text-secondary);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+              <span>Đã kiểm duyệt (Human):</span>
+              <span id="stat-reviewed" style="font-weight: bold; color: #fff;">0</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Chưa kiểm duyệt:</span>
+              <span id="stat-pending" style="font-weight: bold; color: var(--color-neutral);">0</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Leads Data Table Area -->
+      <div class="leads-section">
+        
+        <div class="glass-card" style="min-height: 400px; position: relative;">
+          <div id="loader-table" class="loading-overlay">
+            <div class="spinner"></div>
+            <div id="table-load-text">Đang tải danh sách lead...</div>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+            <h3 class="panel-title" style="margin-bottom: 0; border: none; padding: 0;">
+              Danh Sách Khách Hàng Tiềm Năng
+            </h3>
+            
+            <div style="display: flex; gap: 8px;">
+              <select id="filter-classification" class="input-glass" style="width: auto; padding: 6px 12px;" onchange="renderLeadsTable()">
+                <option value="all">Tất cả phân loại</option>
+                <option value="VIP">Phân loại: VIP</option>
+                <option value="Tiềm năng">Phân loại: Tiềm năng</option>
+                <option value="Rác">Phân loại: Rác</option>
+                <option value="Chưa đánh giá">Phân loại: Chưa đánh giá</option>
+              </select>
+              
+              <select id="filter-review" class="input-glass" style="width: auto; padding: 6px 12px;" onchange="renderLeadsTable()">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="reviewed">Đã duyệt (Human)</option>
+                <option value="pending">Chờ kiểm duyệt</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="table-container">
+            <table id="leads-table">
+              <thead>
+                <tr>
+                  <th style="width: 50px; text-align: center;">Mã</th>
+                  <th style="width: 150px;">Khách Hàng</th>
+                  <th style="width: 250px;">Nội Dung Nhu Cầu</th>
+                  <th style="width: 100px; text-align: center;">Điểm AI</th>
+                  <th style="width: 120px; text-align: center;">Phân Loại</th>
+                  <th>Lý Do Đánh Giá</th>
+                  <th style="width: 130px; text-align: center;">Duyệt</th>
+                  <th style="width: 140px; text-align: center;">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="leads-tbody">
+                <!-- Data will be populated here -->
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <!-- Edit Lead Modal -->
+  <div id="edit-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-lead-name">Chỉnh sửa Lead</h3>
+        <button class="close-modal-btn" onclick="closeModal()">&times;</button>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" id="edit-lead-id">
+        
+        <div class="form-group">
+          <label>Nội dung nhu cầu gốc:</label>
+          <div id="modal-lead-note" style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; font-size: 13px; color: var(--text-secondary); max-height: 100px; overflow-y: auto;">
+            Nhu cầu...
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label for="edit-score">Điểm số AI (0 - 100)</label>
+            <input type="number" id="edit-score" class="input-glass" min="0" max="100" oninput="autoClassify()">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-classification">Phân loại</label>
+            <select id="edit-classification" class="input-glass">
+              <option value="VIP">VIP</option>
+              <option value="Tiềm năng">Tiềm năng</option>
+              <option value="Rác">Rác</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-reason">Lý do chấm điểm / Đánh giá chi tiết</label>
+          <textarea id="edit-reason" class="input-glass" rows="4" style="resize: none;" placeholder="Viết lý do hoặc ghi chú của người kiểm duyệt"></textarea>
+        </div>
+        
+        <div style="display: flex; gap: 12px; margin-top: 10px;">
+          <button class="btn btn-secondary" onclick="closeModal()">Hủy</button>
+          <button class="btn btn-primary" onclick="saveLeadEdit()">Cập Nhật & Phê Duyệt</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let localLeads = [];
+    
+    // Auto load API key from localStorage if it exists
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedKey = localStorage.getItem("gemini_api_key");
+      if (savedKey) {
+        document.getElementById("input-api-key").value = savedKey;
+      }
+      updateApiStatus();
+      loadLeads();
+    });
+    
+    function updateApiStatus() {
+      const apiKey = document.getElementById("input-api-key").value.trim();
+      const dot = document.getElementById("api-status-dot");
+      const text = document.getElementById("api-status-text");
+      
+      if (apiKey) {
+        localStorage.setItem("gemini_api_key", apiKey);
+        dot.className = "status-dot active";
+        text.textContent = "Gemini AI: Sẵn sàng";
+      } else {
+        localStorage.removeItem("gemini_api_key");
+        dot.className = "status-dot simulated";
+        text.textContent = "Simulated AI (Mô phỏng)";
+      }
+    }
+    
+    function showLoader(elementId, show, text = "Đang xử lý...") {
+      const loader = document.getElementById(elementId);
+      if (loader) {
+        if (show) {
+          loader.classList.add("active");
+          const textEl = loader.querySelector("div:last-child");
+          if (textEl) textEl.textContent = text;
+        } else {
+          loader.classList.remove("active");
+        }
+      }
+    }
+    
+    async function loadLeads() {
+      showLoader("loader-table", true, "Đang tải dữ liệu khách hàng...");
+      try {
+        const res = await fetch("/api/leads");
+        const data = await res.json();
+        localLeads = data;
+        renderLeadsTable();
+        updateStats();
+      } catch (err) {
+        alert("Lỗi tải dữ liệu khách hàng: " + err.message);
+      } finally {
+        showLoader("loader-table", false);
+      }
+    }
+    
+    async function fetchLeads() {
+      const url = document.getElementById("input-sheet-url").value.trim();
+      showLoader("loader-config", true, "Đang đồng bộ Google Sheets...");
+      try {
+        const res = await fetch("/api/fetch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+        alert(data.message);
+        loadLeads();
+      } catch (err) {
+        alert("Lỗi đồng bộ dữ liệu: " + err.message);
+      } finally {
+        showLoader("loader-config", false);
+      }
+    }
+    
+    async function scoreLeads() {
+      const apiKey = document.getElementById("input-api-key").value.trim();
+      showLoader("loader-table", true, apiKey ? "Đang gọi Gemini AI chấm điểm..." : "Đang chạy bộ lọc quy tắc chấm điểm...");
+      try {
+        const res = await fetch("/api/score", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ api_key: apiKey })
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+          alert(data.message);
+          localLeads = data.leads;
+          renderLeadsTable();
+          updateStats();
+        } else {
+          alert("Lỗi chấm điểm: " + data.message);
+        }
+      } catch (err) {
+        alert("Lỗi kết nối API chấm điểm: " + err.message);
+      } finally {
+        showLoader("loader-table", false);
+      }
+    }
+    
+    function updateStats() {
+      const total = localLeads.length;
+      const vip = localLeads.filter(l => l.classification === "VIP").length;
+      const potential = localLeads.filter(l => l.classification === "Tiềm năng").length;
+      const trash = localLeads.filter(l => l.classification === "Rác").length;
+      const reviewed = localLeads.filter(l => l.human_reviewed).length;
+      const pending = total - reviewed;
+      
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-vip").textContent = vip;
+      document.getElementById("stat-potential").textContent = potential;
+      document.getElementById("stat-trash").textContent = trash;
+      document.getElementById("stat-reviewed").textContent = reviewed;
+      document.getElementById("stat-pending").textContent = pending;
+    }
+    
+    function renderLeadsTable() {
+      const tbody = document.getElementById("leads-tbody");
+      tbody.innerHTML = "";
+      
+      const filterClass = document.getElementById("filter-classification").value;
+      const filterRev = document.getElementById("filter-review").value;
+      
+      const filtered = localLeads.filter(lead => {
+        // Classification filter
+        if (filterClass !== "all" && lead.classification !== filterClass) {
+          return false;
+        }
+        // Review filter
+        if (filterRev !== "all") {
+          if (filterRev === "reviewed" && !lead.human_reviewed) return false;
+          if (filterRev === "pending" && lead.human_reviewed) return false;
+        }
+        return true;
+      });
+      
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 40px 0;">Không tìm thấy khách hàng nào khớp bộ lọc.</td></tr>`;
+        return;
+      }
+      
+      filtered.forEach(lead => {
+        const row = document.createElement("tr");
+        
+        // Badge style
+        let badgeClass = "badge-none";
+        if (lead.classification === "VIP") badgeClass = "badge-vip";
+        else if (lead.classification === "Tiềm năng") badgeClass = "badge-potential";
+        else if (lead.classification === "Rác") badgeClass = "badge-trash";
+        
+        // Review status pill
+        const reviewStatus = lead.human_reviewed 
+          ? `<span class="status-pill status-reviewed">Đã duyệt</span>`
+          : `<span class="status-pill status-pending">Chờ duyệt</span>`;
+          
+        row.innerHTML = `
+          <td style="text-align: center; font-weight: bold; color: var(--text-secondary);">${lead.id}</td>
+          <td>
+            <div style="font-weight: 600; color: #fff;">${lead.name}</div>
+            <div style="font-size: 12px; color: var(--text-secondary);">${lead.phone}</div>
+          </td>
+          <td>
+            <div style="max-height: 80px; overflow-y: auto; font-size: 13px;" title="${lead.note}">
+              ${lead.note || '<span style="color: var(--text-muted)">Không có ghi chú</span>'}
+            </div>
+          </td>
+          <td style="text-align: center;">
+            <span class="score-badge ${badgeClass}">${lead.score}</span>
+          </td>
+          <td style="text-align: center;">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase;">${lead.classification}</span>
+          </td>
+          <td>
+            <div style="font-size: 13px; color: #e2e8f0;">${lead.reason}</div>
+          </td>
+          <td style="text-align: center;">
+            ${reviewStatus}
+          </td>
+          <td style="text-align: center;">
+            <div class="action-btn-group">
+              ${!lead.human_reviewed ? `
+                <button class="action-icon-btn approve" onclick="quickApprove(${lead.id})" title="Phê duyệt nhanh kết quả AI">
+                  Duyệt nhanh
+                </button>
+              ` : ''}
+              <button class="action-icon-btn" onclick="openEditModal(${lead.id})">
+                Sửa
+              </button>
+            </div>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+    
+    async function quickApprove(leadId) {
+      const lead = localLeads.find(l => l.id === leadId);
+      if (!lead) return;
+      
+      try {
+        const res = await fetch(`/api/leads/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            score: lead.score,
+            classification: lead.classification,
+            reason: lead.reason + " (Đã duyệt nhanh bởi kiểm duyệt viên)"
+          })
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+          // Update local data
+          const idx = localLeads.findIndex(l => l.id === leadId);
+          localLeads[idx] = data.lead;
+          renderLeadsTable();
+          updateStats();
+        }
+      } catch (err) {
+        alert("Lỗi phê duyệt nhanh: " + err.message);
+      }
+    }
+    
+    function openEditModal(leadId) {
+      const lead = localLeads.find(l => l.id === leadId);
+      if (!lead) return;
+      
+      document.getElementById("edit-lead-id").value = lead.id;
+      document.getElementById("modal-lead-name").textContent = `Kiểm Duyệt: ${lead.name}`;
+      document.getElementById("modal-lead-note").textContent = lead.note;
+      document.getElementById("edit-score").value = lead.score;
+      document.getElementById("edit-classification").value = lead.classification;
+      document.getElementById("edit-reason").value = lead.reason;
+      
+      document.getElementById("edit-modal").classList.add("active");
+    }
+    
+    function closeModal() {
+      document.getElementById("edit-modal").classList.remove("active");
+    }
+    
+    function autoClassify() {
+      // Auto toggle classification based on score for ease of use
+      const score = parseInt(document.getElementById("edit-score").value) || 0;
+      const select = document.getElementById("edit-classification");
+      
+      if (score >= 90) {
+        select.value = "VIP";
+      } else if (score <= 20) {
+        select.value = "Rác";
+      } else {
+        select.value = "Tiềm năng";
+      }
+    }
+    
+    async function saveLeadEdit() {
+      const leadId = parseInt(document.getElementById("edit-lead-id").value);
+      const score = parseInt(document.getElementById("edit-score").value) || 0;
+      const classification = document.getElementById("edit-classification").value;
+      const reason = document.getElementById("edit-reason").value;
+      
+      try {
+        const res = await fetch(`/api/leads/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ score, classification, reason })
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+          const idx = localLeads.findIndex(l => l.id === leadId);
+          localLeads[idx] = data.lead;
+          closeModal();
+          renderLeadsTable();
+          updateStats();
+        }
+      } catch (err) {
+        alert("Lỗi cập nhật: " + err.message);
+      }
+    }
+    
+    async function exportExcel() {
+      if (localLeads.length === 0) {
+        alert("Không có dữ liệu khách hàng để xuất báo cáo!");
+        return;
+      }
+      
+      showLoader("loader-table", true, "Đang tạo file Excel báo cáo...");
+      try {
+        // Send request to export excel and trigger file download
+        const res = await fetch("/api/export", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        
+        if (res.status === 200) {
+          const blob = await res.blob();
+          const downloadUrl = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = downloadUrl;
+          a.download = "danh_sach_khach_hang_tiem_nang.xlsx";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          const data = await res.json();
+          alert("Lỗi xuất Excel: " + data.message);
+        }
+      } catch (err) {
+        alert("Lỗi kết nối xuất Excel: " + err.message);
+      } finally {
+        showLoader("loader-table", false);
+      }
+    }
+  </script>
+</body>
+</html>
